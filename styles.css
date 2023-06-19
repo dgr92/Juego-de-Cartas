@@ -1,8 +1,12 @@
 body {
   font-family: sans-serif;
   font-weight: bold;
+}
+
+.gameApp{
   display: flex;
   flex-wrap: wrap;
+  justify-content: space-evenly;
 }
 
 .card {
