@@ -3,7 +3,14 @@ body {
   font-weight: bold;
 }
 
-.shake-left-right{animation:shake-left-right 0.7s linear both} @keyframes shake-left-right{0%,100%{transform:rotate(0deg);transform-origin:50% 50%}10%{transform:rotate(8deg)}20%,40%,60%{transform:rotate(-10deg)}30%,50%,70%{transform:rotate(10deg)}80%{transform:rotate(-8deg)}90%{transform:rotate(8deg)}}
+.shake-left-right{animation:shake-left-right 0.8s linear both} @keyframes shake-left-right{0%,100%{transform:rotate(0deg);transform-origin:50% 50%}10%{transform:rotate(8deg)}20%,40%,60%{transform:rotate(-10deg)}30%,50%,70%{transform:rotate(10deg)}80%{transform:rotate(-8deg)}90%{transform:rotate(8deg)}}
+
+
+.blur-out-contract{animation:blur-out-contract 0.8s linear both} @keyframes blur-out-contract{0%{transform:scale(1);filter:blur(.01px);} 100%{transform:scale(0);filter:blur(12px);opacity:0}}
+ 
+
+.blur-in-expand{animation:blur-in-expand 0.8s linear both} @keyframes blur-in-expand{0%{transform:scale(0);filter:blur(12px);opacity:0}100%{transform:scale(1);filter:blur(0);opacity:1}}
+
 
 .gameApp{
   display: flex;
