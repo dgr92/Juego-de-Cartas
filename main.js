@@ -23,6 +23,16 @@ const listEmojis = [
 listEmojis.sort(() => (Math.random() > 0.5 ? 1 : -1));
 console.log(listEmojis);
 
+  let startButton = document.querySelector(".start-button");
+  let startScreen = document.querySelector(".start-screen");
+  let gameScreen = document.querySelector(".game-screen");
+
+  startButton.addEventListener("click", function() {
+    startScreen.style.display = "none";
+    gameScreen.style.display = "block";
+  });
+
+
 //Capturamos el section que contiene el juego completo
 const gameApp = document.querySelector(".gameApp");
 let templateHTML = "";
