@@ -26,10 +26,15 @@ console.log(listEmojis);
 let startButton = document.querySelector(".start-button");
 let startScreen = document.querySelector(".start-screen");
 let gameScreen = document.querySelector(".game-screen");
+let finalScreen = document.querySelector(".final-screen");
 
 startButton.addEventListener("click", function () {
-  startScreen.style.display = "none";
-  gameScreen.style.display = "block";
+  startScreen.classList.add("blur-out-contract");
+  setTimeout(() => {
+    startScreen.style.display = "none";
+    gameScreen.style.display = "block";
+    gameScreen.classList.add("blur-in-expand");
+  }, 800);
 });
 
 //Capturamos el section que contiene el juego completo
@@ -113,6 +118,7 @@ function reveal(e) {
       //Cuando estas longitudes son las mismas el juego se acaba, Por lo que debemos llamar otra función que nos mande los movimientos realizados y la nos mande la victoria o derrota
       // console.log(emojisValue);
       //Cuando estas longitudes son las mismas el juego se acaba, Por lo que debemos llamar otra función que nos mande los movimientos realizados y la nos mande la victoria o derrota. Al div final
+      FinalScore();
       console.log(
         " El juego está completo",
         emojisValue,
@@ -123,9 +129,14 @@ function reveal(e) {
     }
   } else if (cont >= 2 && card1Value !== card2Value) {
     console.log("son distintas");
+    card1back = card1.querySelector(".back");
+    card2back = card2.querySelector(".back");
+    console.log(card1back);
     setTimeout(() => {
       card1.classList.add("shake-left-right"); //Animación
       card2.classList.add("shake-left-right");
+      card1back.style.background = "linear-gradient(red, #deb0b0)";
+      card2back.style.background = "linear-gradient(red, #deb0b0)";
     }, 300);
     flipAnimation = setTimeout(() => {
       card1.classList.remove("flipped");
@@ -133,6 +144,8 @@ function reveal(e) {
       cont = 0;
       card1.classList.remove("shake-left-right"); //Animación
       card2.classList.remove("shake-left-right");
+      card1back.style.background = "linear-gradient(steelblue, lightsteelblue)";
+      card2back.style.background = "linear-gradient(steelblue, lightsteelblue)";
     }, 1000);
   }
   // return emojisValue;
@@ -194,3 +207,15 @@ function resetGame() {
 }
 
 resetButton.addEventListener("click", resetGame);
+
+function FinalScore() {
+  gameScreen.classList.add("blur-out-contract");
+  setTimeout(() => {
+    gameScreen.style.display = "none";
+    finalScreen.style.display = "block";
+    finalScreen.classList.add("blur-in-expand");
+  }, 800);
+  result = document.querySelector(".final-screen p.first-child");
+  tries = document.querySelector(".final-screen p.nth-child(2)");
+  time = document.querySelector(".final-screen p.last-child");
+}
