@@ -1,6 +1,9 @@
 body {
   font-family: sans-serif;
   font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .shake-left-right{animation:shake-left-right 0.8s linear both} @keyframes shake-left-right{0%,100%{transform:rotate(0deg);transform-origin:50% 50%}10%{transform:rotate(8deg)}20%,40%,60%{transform:rotate(-10deg)}30%,50%,70%{transform:rotate(10deg)}80%{transform:rotate(-8deg)}90%{transform:rotate(8deg)}}
@@ -12,10 +15,12 @@ body {
 .blur-in-expand{animation:blur-in-expand 0.8s linear both} @keyframes blur-in-expand{0%{transform:scale(0);filter:blur(12px);opacity:0}100%{transform:scale(1);filter:blur(0);opacity:1}}
 
 
-.gameApp{
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-evenly;
+.start-screen{
+  text-align: center;
+}
+
+.start-button{
+  padding: 8px 15px;
 }
 
 .game-screen {
@@ -28,18 +33,29 @@ body {
 
 .gameApp {
   display: grid;
-  justify-content: space-evenly;
-  padding: 10px;
-  grid-gap: 10px;
+  justify-content: center;
+  align-items: center;
+  padding: 5px;
+  grid-gap: 6px;
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: repeat(4, 1fr);
+  justify-items: stretch;
+}
+
+.resetBtn{
+  padding: 6px 10px;
+  display: block;
+  margin: 10px auto;
+  position: relative;
+  text-align: center;
 }
 
 .card {
-  width: 200px;
-  height: 300px;
+  position: relative;
+  width: 125px;
+  height: 140px;
   perspective: 600px;
-  margin: 1rem;
+  margin: 0.5rem;
 }
 
 .content {
