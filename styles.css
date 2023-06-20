@@ -1,9 +1,20 @@
-body {
+:root{
+  --color-01: #545BE8;
+  --color-02: #F0C932;
+}
+ 
+* {
+  box-sizing: border-box;
   font-family: sans-serif;
   font-weight: bold;
+}
+
+body {
   display: flex;
   align-items: center;
   justify-content: center;
+  height: 100vh;
+  background-color: var(--color-01);
 }
 
 .shake-left-right{animation:shake-left-right 0.8s linear both} @keyframes shake-left-right{0%,100%{transform:rotate(0deg);transform-origin:50% 50%}10%{transform:rotate(8deg)}20%,40%,60%{transform:rotate(-10deg)}30%,50%,70%{transform:rotate(10deg)}80%{transform:rotate(-8deg)}90%{transform:rotate(8deg)}}
@@ -21,6 +32,8 @@ body {
 .tracking-in-expand-forward-bottom{animation:tracking-in-expand-forward-bottom 1.5s linear both} @keyframes tracking-in-expand-forward-bottom{0%{letter-spacing:-.2em;transform:translateZ(-700px) translateY(100px);opacity:0}40%{opacity:.6}100%{transform:translateZ(0) translateY(0);opacity:1}}
 .start-screen{
   text-align: center;
+  background-color: var(--color-02);
+  border-radius: 5%;
 }
 
 .rotate-scale-down{animation:rotate-scale-down 1.2s linear both} @keyframes rotate-scale-down{0%{transform:scale(1) rotateZ(0)}50%{transform:scale(.5) rotateZ(180deg)}100%{transform:scale(1) rotateZ(360deg)}}
@@ -30,6 +43,17 @@ body {
 /*---------*/
 .start-button{
   padding: 8px 15px;
+  margin-bottom: 10px;
+}
+
+.game-rules {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  list-style: none;
+  text-align: justify;
+  padding: 8px;
 }
 
 .game-screen {
@@ -38,6 +62,8 @@ body {
 
 .final-screen {
   display: none;
+  background-color: var(--color-02);
+  border-radius: 10%;
 }
 
 .gameApp {
@@ -83,7 +109,7 @@ body {
   background: linear-gradient(black, gray);
   display: grid;
   place-content: center;
-  font-size: 8rem;
+  font-size: 6rem;
   border-radius: 1rem;
   backface-visibility: hidden;
   user-select: none;
