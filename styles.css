@@ -1,11 +1,19 @@
 :root{
-  --color-01: #545BE8;
+  --color-01: #006EB4;
   --color-02: #F0C932;
+  --color-03: #92DEBA; 
+
+  --font-01: sans-serif;
+
+  --font-default: 16px;
+  --text-sm: 20px;
+  --text-md: 25px;
+  --text-lg: 40px;
 }
  
 * {
   box-sizing: border-box;
-  font-family: sans-serif;
+  font-family: var(--font-01);
   font-weight: bold;
 }
 
@@ -61,6 +69,18 @@ body {
 .dark{
     background-color: #1f1f1f;
     color: #fff;
+  font-size: var(--font-default);
+}
+
+h1{
+  font-size: var(--text-lg);
+}
+
+h2{
+  font-size: var(--text-md);
+  margin-left: 20px;
+  margin-right: 20px;
+  margin-top: 20px;
 }
 
 
@@ -68,7 +88,7 @@ body {
 
 
 .blur-out-contract{animation:blur-out-contract 0.8s linear both} @keyframes blur-out-contract{0%{transform:scale(1);filter:blur(.01px);} 100%{transform:scale(0);filter:blur(12px);opacity:0}}
- 
+
 
 .blur-in-expand{animation:blur-in-expand 0.8s linear both} @keyframes blur-in-expand{0%{transform:scale(0);filter:blur(12px);opacity:0}100%{transform:scale(1);filter:blur(0);opacity:1}}
 
@@ -77,30 +97,55 @@ body {
 
 
 .tracking-in-expand-forward-bottom{animation:tracking-in-expand-forward-bottom 1.5s linear both} @keyframes tracking-in-expand-forward-bottom{0%{letter-spacing:-.2em;transform:translateZ(-700px) translateY(100px);opacity:0}40%{opacity:.6}100%{transform:translateZ(0) translateY(0);opacity:1}}
+
+
+.rotate-scale-down{animation:rotate-scale-down 1.2s linear both} @keyframes rotate-scale-down{0%{transform:scale(1) rotateZ(0)}50%{transform:scale(.5) rotateZ(180deg)}100%{transform:scale(1) rotateZ(360deg)}}
+
+
+/*---------*/
+
 .start-screen{
   text-align: center;
   background-color: var(--color-02);
   border-radius: 5%;
 }
 
-.rotate-scale-down{animation:rotate-scale-down 1.2s linear both} @keyframes rotate-scale-down{0%{transform:scale(1) rotateZ(0)}50%{transform:scale(.5) rotateZ(180deg)}100%{transform:scale(1) rotateZ(360deg)}}
-
-
-
-/*---------*/
 .start-button{
   padding: 8px 15px;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
+  border-radius: 2%;
+  background-color: var(--color-03);
 }
 
 .game-rules {
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   flex-direction: column;
-  list-style: none;
   text-align: justify;
-  padding: 8px;
+  list-style: none;
+  padding: 40px;
+  font-size: var(--font-default);
+}
+
+.list-title{
+  font-size: var(--text-sm);
+}
+
+.game-rules li {
+  margin-top: 10px;
+}
+
+.score-marker {
+  display: flex;
+  justify-content: center;
+  margin: auto;
+  align-items: center;
+
+}
+
+.score-marker :first-child, .score-marker :last-child {
+  margin: 3px;
 }
 
 .score-marker {
@@ -123,6 +168,13 @@ body {
   display: none;
   background-color: var(--color-02);
   border-radius: 10%;
+  text-align: center;
+  background-color: var(--color-02);
+  border-radius: 5%;
+}
+
+.end-button{
+  background-color: var(--color-03);
 }
 
 .gameApp {
@@ -142,6 +194,7 @@ body {
   margin: 10px auto;
   position: relative;
   text-align: center;
+  background-color: var(--color-03);
 }
 
 .card {
