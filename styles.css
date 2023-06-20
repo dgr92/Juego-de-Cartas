@@ -15,7 +15,54 @@ body {
   justify-content: center;
   height: 100vh;
   background-color: var(--color-01);
+  transition: color 1s ease,background-color 1s ease;
 }
+
+/*Modo oscuro - No cambiar*/
+.change-mode{
+  position: absolute;
+  top: 0.8rem;
+  right: 0.8rem;
+  width: 4rem;
+  height: 2rem;
+  display: block;
+  background-color: #d9d9d9;
+  border-radius: 100px;
+  cursor: pointer;
+  box-shadow: inset 0px 5px 15px rgba(0,0,0,0.3), inset 0px -5px 15px rgba(255,255,255,0.3);
+}
+.change-mode:after{
+  content: '';
+  position: absolute;
+  height: 1.5rem;
+  width: 1.5rem;
+  background-color: #f2f2f2;
+  border-radius: 100px;
+  top: 4px;
+  left: 4px;
+  transition: 0.6s;
+  box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+}
+#dark-mode:checked ~ .change-mode:after{
+  left: 28px;
+  transform: translateX(34%);
+  background-color: linear-gradient(180deg,#777,#3a3a3a);
+}
+
+#dark-mode:checked ~ .change-mode{
+  background-color: #242424;
+}
+
+
+#dark-mode{
+  display: none;
+}
+
+.dark{
+    background-color: #1f1f1f;
+    color: #fff;
+}
+
 
 .shake-left-right{animation:shake-left-right 0.8s linear both} @keyframes shake-left-right{0%,100%{transform:rotate(0deg);transform-origin:50% 50%}10%{transform:rotate(8deg)}20%,40%,60%{transform:rotate(-10deg)}30%,50%,70%{transform:rotate(10deg)}80%{transform:rotate(-8deg)}90%{transform:rotate(8deg)}}
 
