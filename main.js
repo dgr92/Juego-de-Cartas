@@ -169,7 +169,6 @@ for (const card of cards) {
 
 function resetGame() {
   listEmojis.sort(() => (Math.random() > 0.5 ? 1 : -1));
-  debugger
   console.log(listEmojis);
   startTime = parseInt(new Date().getTime() / 1000);
   gameApp = document.querySelector(".gameApp");
@@ -232,12 +231,17 @@ function finalScore(score, totalTime) {
   result = document.querySelector(".final-screen :first-child");
   tries = document.querySelector(".final-screen :nth-child(2)");
   time = document.querySelector(".final-screen :nth-child(3)");
+  best = document.querySelector(".best-game :last-child");
   resultMsg = "¡Enhorabuena! ¡Has ganado!";
   result.innerHTML = resultMsg;
   triesMsg = `Intentos necesarios ${score}`;
-  tries.innerHTML = triesMsg;
+    tries.innerHTML = triesMsg;
   timeMsg = `Tiempo total: ${totalTime}s`;
-  time.innerHTML = timeMsg;
+    time.innerHTML = timeMsg;
+
+  bestGameMsg = `${localStorage.getItem('movements')} movimientos en ${localStorage.getItem('fastest')}s`;
+  best.innerHTML = bestGameMsg;
+
 }
 
 
