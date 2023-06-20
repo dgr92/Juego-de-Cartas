@@ -1,5 +1,3 @@
-"use-strict";
-
 // Lista de emojis ya barajada
 const listEmojis = [
   "🤣",
@@ -25,6 +23,10 @@ const startScreen = document.querySelector(".start-screen");
 const newGameButton = document.querySelector(".end-button");
 const finalScreen = document.querySelector(".final-screen");
 const gameScreen = document.querySelector(".game-screen");
+const tries = document.querySelector(".final-screen :nth-child(2)");
+const time = document.querySelector(".final-screen :nth-child(3)");
+const best = document.querySelector(".best-game :last-child");
+const marker = document.querySelector(".score-marker :nth-child(2)");
 
 startButton.addEventListener("click", function () {
   startTime = parseInt(new Date().getTime() / 1000);
@@ -42,12 +44,17 @@ console.log(listEmojis)
 let gameApp = document.querySelector(".gameApp");
 let templateHTML = "";
 let cont = 0;
+let card1back;
+let card2back;
 let card1, card2;
 let card1Value, card2Value;
 let emojisValue = []; //Acá meteremos con push los valores de los emojis iguales
 let flipAnimation;
 let resetButton = document.querySelector(".resetBtn");
 let score = 0;
+let triesMsg;
+let timeMsg;
+let bestGameMsg;
 // Contador tiempo de partida (momento en el que empieza en UNIX Time)
 let startTime;
 
@@ -88,13 +95,16 @@ function reveal(e) {
 
     cont++;
     score += 1;
-    console.log("Movimientos", score);
+    // Contador de turnos de la partida
+    scoreMarker(score);
+
+    // console.log("Movimientos", score);
   }
   if (cont === 2 && card1Value === card2Value) {
     //me deja seguir jugando y me mete en el array los valores
     const index1 = cards.indexOf(card1); //Obtenemos el indice del elemento que clicamos para poder limpiar el evento y que no nos permita clickar 2 veces el mismo.
     const index2 = cards.indexOf(card2);
-    console.log(index1, index2);
+    // console.log(index1, index2);
     removeClick(index1, index2); //callback a la funcion que nos quita la posibilidad de hacer 2 clicks
 
     index1 !== index2 ? emojisValue.push(card1Value, card2Value) : undefined;
@@ -125,13 +135,13 @@ function reveal(e) {
       });
       
     } else if (emojisValue.length < listEmojis.length) {
-      console.log(" El juego no está completo", emojisValue);
+      // console.log(" El juego no está completo", emojisValue);
     }
   } else if (cont >= 2 && card1Value !== card2Value) {
-    console.log("son distintas");
+    // console.log("son distintas");
     card1back = card1.querySelector(".back");
     card2back = card2.querySelector(".back");
-    console.log(card1back);
+    // console.log(card1back);
     setTimeout(() => {
       card1.classList.add("shake-left-right"); //Animación
       card2.classList.add("shake-left-right");
@@ -169,7 +179,7 @@ for (const card of cards) {
 
 function resetGame() {
   listEmojis.sort(() => (Math.random() > 0.5 ? 1 : -1));
-  console.log(listEmojis);
+  // console.log(listEmojis);
   startTime = parseInt(new Date().getTime() / 1000);
   gameApp = document.querySelector(".gameApp");
   templateHTML = "";
@@ -180,7 +190,7 @@ function resetGame() {
   card1Value = 0;
   card2Value = 0;
   emojisValue = [];
-
+  marker.innerHTML = score;
   listEmojis.forEach((emoji) => {
     templateHTML += `
     <div class="card">
@@ -228,20 +238,13 @@ function finalScore(score, totalTime) {
     finalScreen.style.display = "block";
     finalScreen.classList.add("blur-in-expand");
   }, 800);
-  result = document.querySelector(".final-screen :first-child");
-  tries = document.querySelector(".final-screen :nth-child(2)");
-  time = document.querySelector(".final-screen :nth-child(3)");
-  best = document.querySelector(".best-game :last-child");
-  resultMsg = "¡Enhorabuena! ¡Has ganado!";
-  result.innerHTML = resultMsg;
+
   triesMsg = `Intentos necesarios ${score}`;
     tries.innerHTML = triesMsg;
   timeMsg = `Tiempo total: ${totalTime}s`;
     time.innerHTML = timeMsg;
-
   bestGameMsg = `${localStorage.getItem('movements')} movimientos en ${localStorage.getItem('fastest')}s`;
-  best.innerHTML = bestGameMsg;
-
+    best.innerHTML = bestGameMsg;
 }
 
 
@@ -258,4 +261,8 @@ function bestGame(totalTime, score) {
     localStorage.setItem('movements', score);
     localStorage.setItem('fastest', totalTime);
   }
+}
+
+function scoreMarker(score) {
+  marker.innerHTML = score;
 }

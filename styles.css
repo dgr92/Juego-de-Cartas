@@ -56,6 +56,18 @@ body {
   padding: 8px;
 }
 
+.score-marker {
+  display: flex;
+  justify-content: center;
+  margin: auto;
+  align-items: center;
+
+}
+
+.score-marker :first-child, .score-marker :last-child {
+  margin: 3px;
+}
+
 .game-screen {
   display: none;
 }
