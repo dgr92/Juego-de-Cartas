@@ -15,10 +15,19 @@ body {
 .blur-in-expand{animation:blur-in-expand 0.8s linear both} @keyframes blur-in-expand{0%{transform:scale(0);filter:blur(12px);opacity:0}100%{transform:scale(1);filter:blur(0);opacity:1}}
 
 
+.tracking-out-expand-forward-bottom{animation:tracking-out-expand-forward-bottom 1.2s linear both} @keyframes tracking-out-expand-forward-bottom{0%{transform:translateZ(0) translateY(0);opacity:1}60%{opacity:.8}100%{letter-spacing:1em;transform:translateZ(-700px) translateY(100px);opacity:0}}
+
+
+.tracking-in-expand-forward-bottom{animation:tracking-in-expand-forward-bottom 1.5s linear both} @keyframes tracking-in-expand-forward-bottom{0%{letter-spacing:-.2em;transform:translateZ(-700px) translateY(100px);opacity:0}40%{opacity:.6}100%{transform:translateZ(0) translateY(0);opacity:1}}
 .start-screen{
   text-align: center;
 }
 
+.rotate-scale-down{animation:rotate-scale-down 1.2s linear both} @keyframes rotate-scale-down{0%{transform:scale(1) rotateZ(0)}50%{transform:scale(.5) rotateZ(180deg)}100%{transform:scale(1) rotateZ(360deg)}}
+
+
+
+/*---------*/
 .start-button{
   padding: 8px 15px;
 }
