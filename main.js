@@ -39,7 +39,7 @@ startButton.addEventListener("click", function () {
 });
 
 listEmojis.sort(() => (Math.random() > 0.5 ? 1 : -1));
-console.log(listEmojis)
+console.log(listEmojis);
 //Capturamos el section que contiene el juego completo
 let gameApp = document.querySelector(".gameApp");
 let templateHTML = "";
@@ -119,7 +119,7 @@ function reveal(e) {
         return endTime - startTime;
       };
 
-      bestGame( totalTime(), score);
+      bestGame(totalTime(), score);
 
       console.log(
         `El juego está completo!!. Has necesitado ${score} intentos y has tardado ${totalTime()} segundos!.`
@@ -133,7 +133,6 @@ function reveal(e) {
         gameScreen.style.display = "block";
         resetGame();
       });
-      
     } else if (emojisValue.length < listEmojis.length) {
       // console.log(" El juego no está completo", emojisValue);
     }
@@ -226,6 +225,9 @@ function barajar() {
   setTimeout(() => {
     gameApp.classList.remove("tracking-out-expand-forward-bottom");
     gameApp.classList.remove("tracking-in-expand-forward-bottom");
+    for (const card of cards) {
+      card.classList.remove("rotate-scale-down");
+    }
   }, 3200);
 }
 
@@ -240,29 +242,40 @@ function finalScore(score, totalTime) {
   }, 800);
 
   triesMsg = `Intentos necesarios ${score}`;
-    tries.innerHTML = triesMsg;
+  tries.innerHTML = triesMsg;
   timeMsg = `Tiempo total: ${totalTime}s`;
-    time.innerHTML = timeMsg;
-  bestGameMsg = `${localStorage.getItem('movements')} movimientos en ${localStorage.getItem('fastest')}s`;
-    best.innerHTML = bestGameMsg;
+  time.innerHTML = timeMsg;
+  bestGameMsg = `${localStorage.getItem(
+    "movements"
+  )} movimientos en ${localStorage.getItem("fastest")}s`;
+  best.innerHTML = bestGameMsg;
 }
 
-
 function bestGame(totalTime, score) {
-  if(localStorage.getItem('movements')) {
-    if(score < localStorage.getItem('movements')) {
-      localStorage.setItem('movements', score);
-      localStorage.setItem('fastest', totalTime);
+  if (localStorage.getItem("movements")) {
+    if (score < localStorage.getItem("movements")) {
+      localStorage.setItem("movements", score);
+      localStorage.setItem("fastest", totalTime);
     }
-    if(score == localStorage.getItem('movements') && totalTime < localStorage.getItem('fastest')) {
-      localStorage.setItem('fastest', totalTime);
+    if (
+      score == localStorage.getItem("movements") &&
+      totalTime < localStorage.getItem("fastest")
+    ) {
+      localStorage.setItem("fastest", totalTime);
     }
   } else {
-    localStorage.setItem('movements', score);
-    localStorage.setItem('fastest', totalTime);
+    localStorage.setItem("movements", score);
+    localStorage.setItem("fastest", totalTime);
   }
 }
 
 function scoreMarker(score) {
   marker.innerHTML = score;
 }
+
+//Para cambiar modo
+let dark_mode = document.getElementById("dark-mode");
+let label_change_mode = document.querySelector(".change-mode");
+dark_mode.addEventListener("change", () => {
+  document.body.classList.toggle("dark");
+});
