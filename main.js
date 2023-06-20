@@ -194,6 +194,22 @@ function resetGame() {
     card.classList.remove("flipped");
     card.addEventListener("click", reveal);
   }
+
+  barajar();
+}
+
+function barajar() {
+  gameApp.classList.add("tracking-out-expand-forward-bottom");
+  setTimeout(() => {
+    gameApp.classList.add("tracking-in-expand-forward-bottom");
+    for (const card of cards) {
+      card.classList.add("rotate-scale-down");
+    }
+  }, 1600);
+  setTimeout(() => {
+    gameApp.classList.remove("tracking-out-expand-forward-bottom");
+    gameApp.classList.remove("tracking-in-expand-forward-bottom");
+  }, 3200);
 }
 
 resetButton.addEventListener("click", resetGame);
