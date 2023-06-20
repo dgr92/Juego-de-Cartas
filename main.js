@@ -20,8 +20,6 @@ const listEmojis = [
   "🤩",
 ];
 
-listEmojis.sort(() => (Math.random() > 0.5 ? 1 : -1));
-
 const startButton = document.querySelector(".start-button");
 const startScreen = document.querySelector(".start-screen");
 const newGameButton = document.querySelector(".end-button");
@@ -29,6 +27,7 @@ const finalScreen = document.querySelector(".final-screen");
 const gameScreen = document.querySelector(".game-screen");
 
 startButton.addEventListener("click", function () {
+  startTime = parseInt(new Date().getTime() / 1000);
   startScreen.classList.add("blur-out-contract");
   setTimeout(() => {
     startScreen.style.display = "none";
@@ -37,6 +36,8 @@ startButton.addEventListener("click", function () {
   }, 800);
 });
 
+listEmojis.sort(() => (Math.random() > 0.5 ? 1 : -1));
+console.log(listEmojis)
 //Capturamos el section que contiene el juego completo
 let gameApp = document.querySelector(".gameApp");
 let templateHTML = "";
@@ -48,7 +49,7 @@ let flipAnimation;
 let resetButton = document.querySelector(".resetBtn");
 let score = 0;
 // Contador tiempo de partida (momento en el que empieza en UNIX Time)
-let startTime = parseInt(new Date().getTime() / 1000);
+let startTime;
 
 listEmojis.forEach((emoji) => {
   templateHTML += `
@@ -107,17 +108,22 @@ function reveal(e) {
         const endTime = parseInt(new Date().getTime() / 1000);
         return endTime - startTime;
       };
+
+      bestGame( totalTime(), score);
+
       console.log(
         `El juego está completo!!. Has necesitado ${score} intentos y has tardado ${totalTime()} segundos!.`
       );
 
       finalScore(score, totalTime());
+
       newGameButton.addEventListener("click", function () {
         startScreen.style.display = "none";
         finalScreen.style.display = "none";
         gameScreen.style.display = "block";
         resetGame();
       });
+      
     } else if (emojisValue.length < listEmojis.length) {
       console.log(" El juego no está completo", emojisValue);
     }
@@ -163,7 +169,9 @@ for (const card of cards) {
 
 function resetGame() {
   listEmojis.sort(() => (Math.random() > 0.5 ? 1 : -1));
+  debugger
   console.log(listEmojis);
+  startTime = parseInt(new Date().getTime() / 1000);
   gameApp = document.querySelector(".gameApp");
   templateHTML = "";
   score = 0;
@@ -230,4 +238,20 @@ function finalScore(score, totalTime) {
   tries.innerHTML = triesMsg;
   timeMsg = `Tiempo total: ${totalTime}s`;
   time.innerHTML = timeMsg;
+}
+
+
+function bestGame(totalTime, score) {
+  if(localStorage.getItem('movements')) {
+    if(score < localStorage.getItem('movements')) {
+      localStorage.setItem('movements', score);
+      localStorage.setItem('fastest', totalTime);
+    }
+    if(score == localStorage.getItem('movements') && totalTime < localStorage.getItem('fastest')) {
+      localStorage.setItem('fastest', totalTime);
+    }
+  } else {
+    localStorage.setItem('movements', score);
+    localStorage.setItem('fastest', totalTime);
+  }
 }
