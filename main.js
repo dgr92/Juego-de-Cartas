@@ -304,4 +304,3 @@ dark_mode.addEventListener("change", () => {
    document.body.classList.toggle("dark");
 });
 
-// hola

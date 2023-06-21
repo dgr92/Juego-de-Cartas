@@ -120,7 +120,7 @@ h2{
 .game-rules {
   display: flex;
   justify-content: flex-start;
-  align-items: center;
+  align-items: start;
   flex-direction: column;
   text-align: justify;
   list-style: none;
@@ -135,7 +135,10 @@ h2{
 .game-rules li {
   margin-top: 10px;
 }
-
+ 
+.game-rules li::before{
+  content:"😱";
+}
 .score-marker {
   display: flex;
   justify-content: center;
