@@ -15,22 +15,26 @@
     <div class="start-screen tamaños">
         <h1>Juego de Memoria</h1>
         <h2>Pon a prueba tu memoria encontrando parejas</h2>
-            <ul class="game-rules">
-                <li class="list-title">Normas</li>
-                <li>Voltea 2 cartas clickando en ellas</li>
-                <li>Si coinciden, habrás encontrado una pareja</li>
-                <li>Si son diferentes, se volverán a girar</li>
-                <li>Cada pareja equivale a un movimiento</li>
-                <li>Haz click en Jugar de Nuevo para resetear el juego</li>
-            </ul>
+        <ul class="game-rules">
+            <li class="list-title">Normas</li>
+            <li>Voltea 2 cartas clickando en ellas</li>
+            <li>Si coinciden, habrás encontrado una pareja</li>
+            <li>Si son diferentes, se volverán a girar</li>
+            <li>Cada pareja equivale a un movimiento</li>
+            <li>Haz click en Jugar de Nuevo para resetear el juego</li>
+        </ul>
         <button class="start-button button-common">Comenzar Juego</button>
     </div>
     <div class="game-screen">
         <div class="score-marker">
-            <p>Movimientos:</p>
-            <p>0</p>
-            <p>Tiempo:</p>
-            <p></p>
+            <div>
+                <p>Movimientos:</p>
+                <p>0</p>
+            </div>
+            <div>
+                <p>Tiempo:</p>
+                <p></p>
+            </div>
         </div>
         <section class="gameApp" id="gameApp"></section>
         <button class="play-again button-common" id="play-again">Jugar de Nuevo</button>
@@ -44,7 +48,9 @@
             <p></p>
         </div>
         <button class="end-button button-common">Volver a jugar</button>
+        <button class="reset-best-game">Reset Mejor Partida</button>
     </div>
     <script type="module" src="main.js"></script>
 </body>
+
 </html>

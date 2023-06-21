@@ -82,6 +82,7 @@ h2{
   font-size: var(--font-default);
 }
 
+
 /*Animaciones*/
 
 .shake-left-right{animation:shake-left-right 0.8s linear both} @keyframes shake-left-right{0%,100%{transform:rotate(0deg);transform-origin:50% 50%}10%{transform:rotate(8deg)}20%,40%,60%{transform:rotate(-10deg)}30%,50%,70%{transform:rotate(10deg)}80%{transform:rotate(-8deg)}90%{transform:rotate(8deg)}}
@@ -108,6 +109,7 @@ h2{
   text-align: center;
   background-color: var(--color-02);
   border-radius: 5%;
+  box-shadow:  0px 0px 6px 4px rgb(0 0 0 / 50%)
 }
 
 .start-button{
@@ -141,21 +143,22 @@ h2{
 }
 .score-marker {
   display: flex;
-  justify-content: center;
+  justify-content: space-evenly;
   margin: auto;
   align-items: center;
 
 }
+.score-marker div{
+  display: flex;
+}
+
 
 .score-marker :first-child, .score-marker :last-child {
   margin: 3px;
 }
 
-.score-marker {
-  display: flex;
-  justify-content: center;
-  margin: auto;
-  align-items: center;
+.score-marker p:nth-child(2){
+  margin-right: 20px;
 
 }
 
@@ -174,6 +177,8 @@ h2{
   text-align: center;
   background-color: var(--color-02);
   border-radius: 5%;
+  box-shadow:  0px 0px 6px 4px rgb(0 0 0 / 50%)
+
 }
 
 .final-screen p:first-child {
@@ -241,6 +246,8 @@ h2{
   border-radius: 1rem;
   backface-visibility: hidden;
   user-select: none;
+   /* box-shadow: 5px -4px 7px #3a3a3a; */
+   box-shadow: -6px 5px 5px rgb(0,0,0, 0.5);
 }
 
 .back {
