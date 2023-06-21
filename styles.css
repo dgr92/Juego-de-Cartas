@@ -21,9 +21,20 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 100vh;
+  min-height: 90vh;
   background-color: var(--color-01);
   transition: color 1s ease,background-color 1s ease;
+}
+
+h1{
+  font-size: var(--text-lg);
+}
+
+h2{
+  font-size: var(--text-md);
+  margin-left: 20px;
+  margin-right: 20px;
+  margin-top: 20px;
 }
 
 /*Modo oscuro - No cambiar*/
@@ -61,28 +72,17 @@ body {
   background-color: #242424;
 }
 
-
 #dark-mode{
   display: none;
 }
 
 .dark{
-    background-color: #1f1f1f;
-    color: #fff;
+  background-color: #1f1f1f;
+  color: #fff;
   font-size: var(--font-default);
 }
 
-h1{
-  font-size: var(--text-lg);
-}
-
-h2{
-  font-size: var(--text-md);
-  margin-left: 20px;
-  margin-right: 20px;
-  margin-top: 20px;
-}
-
+/*Animaciones*/
 
 .shake-left-right{animation:shake-left-right 0.8s linear both} @keyframes shake-left-right{0%,100%{transform:rotate(0deg);transform-origin:50% 50%}10%{transform:rotate(8deg)}20%,40%,60%{transform:rotate(-10deg)}30%,50%,70%{transform:rotate(10deg)}80%{transform:rotate(-8deg)}90%{transform:rotate(8deg)}}
 
@@ -173,7 +173,20 @@ h2{
   border-radius: 5%;
 }
 
+.final-screen p:first-child {
+  margin-top: 100px;
+}
+
+.tamaños {
+  min-width: 40%;
+  min-height: 60%;
+}
+
 .end-button{
+  margin-bottom: 10px;
+}
+
+.button-common{
   background-color: var(--color-03);
 }
 
