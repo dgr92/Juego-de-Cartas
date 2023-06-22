@@ -1,23 +1,7 @@
-// Lista de emojis ya barajada
-const listEmojis = [
-  "🤣",
-  "🤣",
-  "😡",
-  "😡",
-  "🤢",
-  "🤢",
-  "💩",
-  "💩",
-  "🤪",
-  "🤪",
-  "😍",
-  "😍",
-  "😱",
-  "😱",
-  "🤩",
-  "🤩",
-];
 
+const listEmojis = ["🤣", "🤣", "😡", "😡", "🤢", "🤢", "💩", "💩", "🤪", "🤪", "😍", "😍", "😱", "😱", "🤩", "🤩"];
+
+// Captura de variables a utilizar
 const startButton = document.querySelector(".start-button");
 const startScreen = document.querySelector(".start-screen");
 const newGameButton = document.querySelector(".end-button");
@@ -26,43 +10,27 @@ const gameScreen = document.querySelector(".game-screen");
 const tries = document.querySelector(".final-screen :nth-child(2)");
 const time = document.querySelector(".final-screen :nth-child(3)");
 const best = document.querySelector(".best-game :last-child");
-const marker = document.querySelector(
-  ".score-marker :first-child :nth-child(2)"
-);
+const marker = document.querySelector(".score-marker :first-child :nth-child(2)");
 const resetBestGame = document.querySelector(".reset-best-game");
-const timeMarker = document.querySelector(
-  ".score-marker :last-child :nth-child(2)"
-);
-
-startButton.addEventListener("click", function () {
-  startTime = parseInt(new Date().getTime() / 1000);
-  startScreen.classList.add("blur-out-contract");
-  setTimeout(() => {
-    startScreen.style.display = "none";
-    gameScreen.style.display = "block";
-    gameScreen.classList.add("blur-in-expand");
-  }, 800);
-});
-
-listEmojis.sort(() => (Math.random() > 0.5 ? 1 : -1));
-console.log(listEmojis);
-//Capturamos el section que contiene el juego completo
+const timeMarker = document.querySelector(".score-marker :last-child :nth-child(2)");
 let gameApp = document.querySelector(".gameApp");
+let resetButton = document.querySelector(".play-again");
+
+// Declaración de variables necesarias
 let templateHTML = "";
 let cont = 0;
-let card1back;
-let card2back;
+let card1back, card2back;
 let card1, card2;
 let card1Value, card2Value;
 let emojisValue = []; //Acá meteremos con push los valores de los emojis iguales
 let flipAnimation;
-let resetButton = document.querySelector(".play-again");
 let score = 0;
-let triesMsg;
-let timeMsg;
-let bestGameMsg;
 let startTime;
 
+// Barajamos el string
+listEmojis.sort(() => (Math.random() > 0.5 ? 1 : -1));
+
+// Generar el tablero de cartas
 listEmojis.forEach((emoji) => {
   templateHTML += `
   <div class="card">
@@ -76,62 +44,50 @@ gameApp.innerHTML = templateHTML;
 
 let cardAll = document.querySelectorAll(".card");
 
-let cards = [...cardAll]; //Hacemos una copia porque nos da un nodeList con todos los div y Js no permite trabajar con eso
-//los cards. Serán necesario para conocer la posicion y asi no clickar 2 veces en ellos
+let cards = [...cardAll]; 
+// Hacemos una copia porque nos da un nodeList con todos los div y Js no permite trabajar con eso
+// los cards. Serán necesario para conocer la posicion y asi no clickar 2 veces en ellos
 
+// Cronómetro ingame 
 setInterval(timer, 1000);
 
+// Función que gira las cartas por parejas, y en caso de no ser iguales las vuelve a poner boca abajo
 function reveal(e) {
   if (cont === 0) {
     //carta 1
     const currentCard = e.currentTarget;
     currentCard.classList.add("flipped");
     card1 = currentCard;
-
     card1Value = card1.querySelector(".back").innerHTML;
-
     cont++;
+
   } else if (cont > 0 && cont < 2) {
     //carta 2
     const currentCard = e.currentTarget;
-
-    // e.target.parentElement.parentElement;
     currentCard.classList.add("flipped");
     card2 = currentCard;
     card2Value = card2.querySelector(".back").innerHTML;
-
     cont++;
     score += 1;
-    // Contador de turnos de la partida
-    scoreMarker(score);
 
-    // console.log("Movimientos", score);
+    // Marcador de puntos ingame 
+    scoreMarker(score);
   }
   if (cont === 2 && card1Value === card2Value) {
     //me deja seguir jugando y me mete en el array los valores
     const index1 = cards.indexOf(card1); //Obtenemos el indice del elemento que clicamos para poder limpiar el evento y que no nos permita clickar 2 veces el mismo.
     const index2 = cards.indexOf(card2);
-    // console.log(index1, index2);
     removeClick(index1, index2); //callback a la funcion que nos quita la posibilidad de hacer 2 clicks
 
     index1 !== index2 ? emojisValue.push(card1Value, card2Value) : undefined;
     cont = 0;
+
     if (emojisValue.length === listEmojis.length) {
       //cuando el array esté completo queremos que salga de la funcion.
-      //Cuando estas longitudes son las mismas el juego se acaba, Por lo que debemos llamar otra función que nos mande los movimientos realizados y la nos mande la victoria o derrota
-      //Cuando estas longitudes son las mismas el juego se acaba, Por lo que debemos llamar otra función que nos mande los movimientos realizados y la nos mande la victoria o derrota. Al div final
-
-      const totalTime = () => {
-        const endTime = parseInt(new Date().getTime() / 1000);
-        return endTime - startTime;
-      };
+      //Cuando estas longitudes son las mismas el juego se acaba, Por lo que debemos llamar otra 
+      //función que nos mande los movimientos realizados y la nos mande la victoria o derrota. Al div final
 
       bestGame(totalTime(), score);
-
-      console.log(
-        `El juego está completo!!. Has necesitado ${score} intentos y has tardado ${totalTime()} segundos!.`
-      );
-
       finalScore(score, totalTime());
 
       newGameButton.addEventListener("click", function () {
@@ -140,14 +96,10 @@ function reveal(e) {
         gameScreen.style.display = "block";
         resetGame();
       });
-    } else if (emojisValue.length < listEmojis.length) {
-      // console.log(" El juego no está completo", emojisValue);
-    }
+    };
   } else if (cont >= 2 && card1Value !== card2Value) {
-    // console.log("son distintas");
     card1back = card1.querySelector(".back");
     card2back = card2.querySelector(".back");
-    // console.log(card1back);
     setTimeout(() => {
       card1.classList.add("shake-left-right"); //Animación
       card2.classList.add("shake-left-right");
@@ -160,14 +112,18 @@ function reveal(e) {
       cont = 0;
       card1.classList.remove("shake-left-right"); //Animación
       card2.classList.remove("shake-left-right");
-      card1back.style.background =
-        "linear-gradient(0deg, #b0c4de 15%, #f7f7f7 60%)";
-      card2back.style.background =
-        "linear-gradient(0deg, #b0c4de 15%, #f7f7f7 60%)";
+      card1back.style.background = "linear-gradient(0deg, #b0c4de 15%, #f7f7f7 60%)";
+      card2back.style.background = "linear-gradient(0deg, #b0c4de 15%, #f7f7f7 60%)";
     }, 1000);
-  }
-  // return emojisValue;
-}
+  };
+};
+
+resetButton.addEventListener("click", resetGame);
+
+// Gira cada carta al hacer click
+for (const card of cards) {
+  card.addEventListener("click", reveal);
+};
 
 //Funcion que hace que no puedas clicar de nuevo cuando son iguales los valores. Se le hace un callback que recibe la posicion de los div iguales
 function removeClick(index1, index2) {
@@ -177,18 +133,12 @@ function removeClick(index1, index2) {
   } else {
     cards[index1].removeEventListener("click", reveal);
     cards[index2].removeEventListener("click", reveal);
-  }
-}
-
-for (const card of cards) {
-  //el cont de acá no funciona, ya que con este bucle te lo hace las 16 veces. No admite if antes de llamar la funcion porque esta no es una funcion global y no revuelve nada.
-  card.addEventListener("click", reveal);
-}
+  };
+};
 
 // Resetear partida
 function resetGame() {
   listEmojis.sort(() => (Math.random() > 0.5 ? 1 : -1));
-  // console.log(listEmojis);
   startTime = parseInt(new Date().getTime() / 1000);
   gameApp = document.querySelector(".gameApp");
   templateHTML = "";
@@ -219,29 +169,41 @@ function resetGame() {
   for (const card of cards) {
     card.classList.remove("flipped");
     card.addEventListener("click", reveal);
-  }
+  };
   barajar();
-}
+};
 
-resetButton.addEventListener("click", resetGame);
+// Cambio de primera pantalla al juego, al pulsar el boton de "empezar"
+startButton.addEventListener("click", function () {
+  startTime = parseInt(new Date().getTime() / 1000);
+  startScreen.classList.add("blur-out-contract");
+  setTimeout(() => {
+    startScreen.style.display = "none";
+    gameScreen.style.display = "block";
+    gameScreen.classList.add("blur-in-expand");
+  }, 800);
+});
 
+// Animaciones de las cartas al resetear o volver a jugar
 function barajar() {
   gameApp.classList.add("tracking-out-expand-forward-bottom");
   setTimeout(() => {
     gameApp.classList.add("tracking-in-expand-forward-bottom");
     for (const card of cards) {
       card.classList.add("rotate-scale-down");
-    }
+    };
   }, 1600);
+
   setTimeout(() => {
     gameApp.classList.remove("tracking-out-expand-forward-bottom");
     gameApp.classList.remove("tracking-in-expand-forward-bottom");
     for (const card of cards) {
       card.classList.remove("rotate-scale-down");
-    }
+    };
   }, 3200);
-}
+};
 
+// Resultado de la partida en la pantalla final
 function finalScore(score, totalTime) {
   gameScreen.classList.add("blur-out-contract");
   setTimeout(() => {
@@ -250,61 +212,53 @@ function finalScore(score, totalTime) {
     finalScreen.classList.add("blur-in-expand");
   }, 800);
 
-  triesMsg = `Intentos necesarios ${score}`;
-  tries.innerHTML = triesMsg;
-  timeMsg = `Tiempo total: ${totalTime}s`;
-  time.innerHTML = timeMsg;
-  bestGameMsg = `${localStorage.getItem(
-    "movements"
-  )} movimientos en ${localStorage.getItem("fastest")}s`;
-  best.innerHTML = bestGameMsg;
-}
+  tries.innerHTML = `Intentos necesarios ${score}`;
+  time.innerHTML = `Tiempo total: ${totalTime}s`;
+  best.innerHTML = `${localStorage.getItem("movements")} movimientos en ${localStorage.getItem("fastest")}s`;
+};
+
 // Mejor partida en la pantalla final
 function bestGame(totalTime, score) {
   if (localStorage.getItem("movements")) {
     if (score < localStorage.getItem("movements")) {
       localStorage.setItem("movements", score);
       localStorage.setItem("fastest", totalTime);
-      console.log(score);
-      console.log(totalTime);
-    }
-    if (
-      score == localStorage.getItem("movements") &&
-      totalTime < localStorage.getItem("fastest")
-    ) {
+    };
+    if (score == localStorage.getItem("movements") && totalTime < localStorage.getItem("fastest")) {
       localStorage.setItem("fastest", totalTime);
-    }
-  } else if (
-    !localStorage.getItem("movements") ||
-    localStorage.getItem("movements") == 0
-  ) {
+    };
+  } else if (!localStorage.getItem("movements") || localStorage.getItem("movements") == 0) {
     localStorage.setItem("movements", score);
     localStorage.setItem("fastest", totalTime);
-  }
-}
-
-// Resetear marcador mejor partida
-resetBestGame.addEventListener("click", () => {
-  localStorage.clear();
-  bestGameMsg = "0 movimientos en 0s";
-  best.innerHTML = bestGameMsg;
-});
+  };
+};
 
 // Marcador de movimientos ingame
 function scoreMarker(score) {
   marker.innerHTML = score;
-}
+};
 
 // Cronómetro partida ingame
 function timer() {
   let actualTime = parseInt(new Date().getTime() / 1000);
-  timeMarker.innerHTML = `${actualTime - startTime}s`;
-}
+  return timeMarker.innerHTML = `${actualTime - startTime}s`;
+};
+
+// Calcular el tiempo total de la partida en la pantalla final
+const totalTime = () => {
+  const endTime = parseInt(new Date().getTime() / 1000);
+  return endTime - startTime;
+};
+
+// Resetear marcador mejor partida
+resetBestGame.addEventListener("click", () => {
+  localStorage.clear();
+  best.innerHTML = "0 movimientos en 0s";
+});
 
 //Para cambiar modo
 let dark_mode = document.getElementById("dark-mode");
-// let label_change_mode = document.querySelector(".change-mode");
-dark_mode.addEventListener("change", (e) => {
+dark_mode.addEventListener("change", () => {
   document.body.classList.toggle("dark");
   if (e.target.checked === true) {
     startScreen.style.background = "#495057";
@@ -317,9 +271,9 @@ dark_mode.addEventListener("change", (e) => {
   }
 });
 
-// //PARA CRISTIPHER
+//PARA CRISTIPHER
 // const li = document.querySelectorAll(".game-rules li:not(:first-child)");
 // let arrayLi = [...li];
-// //NECESARIO CREAR UN BUCLE PARA QUE RECORRAS ESOS LI Y PONGA SU EMOJI
+//NECESARIO CREAR UN BUCLE PARA QUE RECORRAS ESOS LI Y PONGA SU EMOJI
 // arrayLi[0].setAttribute("data-content", "EMOJIISS ");
 // console.log(arrayLi);
