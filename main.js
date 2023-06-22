@@ -112,8 +112,10 @@ function reveal(e) {
       cont = 0;
       card1.classList.remove("shake-left-right"); //Animación
       card2.classList.remove("shake-left-right");
-      card1back.style.background = "linear-gradient(0deg, #b0c4de 15%, #f7f7f7 60%)";
-      card2back.style.background = "linear-gradient(0deg, #b0c4de 15%, #f7f7f7 60%)";
+      card1back.style.background =
+        "linear-gradient(0deg, #a4c3b2 15%, #F7F7EE)";
+      card2back.style.background =
+        "linear-gradient(0deg, #a4c3b2 15%, #F7F7EE)";
     }, 1000);
   };
 };
@@ -258,7 +260,7 @@ resetBestGame.addEventListener("click", () => {
 
 //Para cambiar modo
 let dark_mode = document.getElementById("dark-mode");
-dark_mode.addEventListener("change", () => {
+dark_mode.addEventListener("change", (e) => {
   document.body.classList.toggle("dark");
   if (e.target.checked === true) {
     startScreen.style.background = "#495057";
