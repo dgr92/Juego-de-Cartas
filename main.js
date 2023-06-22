@@ -1,5 +1,21 @@
-
-const listEmojis = ["🤣", "🤣", "😡", "😡", "🤢", "🤢", "💩", "💩", "🤪", "🤪", "😍", "😍", "😱", "😱", "🤩", "🤩"];
+const listEmojis = [
+  "🤣",
+  "🤣",
+  "😡",
+  "😡",
+  "🤢",
+  "🤢",
+  "💩",
+  "💩",
+  "🤪",
+  "🤪",
+  "😍",
+  "😍",
+  "😱",
+  "😱",
+  "🤩",
+  "🤩",
+];
 
 // Captura de variables a utilizar
 const startButton = document.querySelector(".start-button");
@@ -10,9 +26,13 @@ const gameScreen = document.querySelector(".game-screen");
 const tries = document.querySelector(".final-screen :nth-child(2)");
 const time = document.querySelector(".final-screen :nth-child(3)");
 const best = document.querySelector(".best-game :last-child");
-const marker = document.querySelector(".score-marker :first-child :nth-child(2)");
+const marker = document.querySelector(
+  ".score-marker :first-child :nth-child(2)"
+);
 const resetBestGame = document.querySelector(".reset-best-game");
-const timeMarker = document.querySelector(".score-marker :last-child :nth-child(2)");
+const timeMarker = document.querySelector(
+  ".score-marker :last-child :nth-child(2)"
+);
 let gameApp = document.querySelector(".gameApp");
 let resetButton = document.querySelector(".play-again");
 
@@ -27,7 +47,7 @@ let flipAnimation;
 let score = 0;
 let startTime;
 
-// Barajamos el string
+// Barajamos el Array
 listEmojis.sort(() => (Math.random() > 0.5 ? 1 : -1));
 
 // Generar el tablero de cartas
@@ -44,11 +64,11 @@ gameApp.innerHTML = templateHTML;
 
 let cardAll = document.querySelectorAll(".card");
 
-let cards = [...cardAll]; 
+let cards = [...cardAll];
 // Hacemos una copia porque nos da un nodeList con todos los div y Js no permite trabajar con eso
 // los cards. Serán necesario para conocer la posicion y asi no clickar 2 veces en ellos
 
-// Cronómetro ingame 
+// Cronómetro ingame
 setInterval(timer, 1000);
 
 // Función que gira las cartas por parejas, y en caso de no ser iguales las vuelve a poner boca abajo
@@ -60,7 +80,6 @@ function reveal(e) {
     card1 = currentCard;
     card1Value = card1.querySelector(".back").innerHTML;
     cont++;
-
   } else if (cont > 0 && cont < 2) {
     //carta 2
     const currentCard = e.currentTarget;
@@ -70,7 +89,7 @@ function reveal(e) {
     cont++;
     score += 1;
 
-    // Marcador de puntos ingame 
+    // Marcador de puntos ingame
     scoreMarker(score);
   }
   if (cont === 2 && card1Value === card2Value) {
@@ -84,7 +103,7 @@ function reveal(e) {
 
     if (emojisValue.length === listEmojis.length) {
       //cuando el array esté completo queremos que salga de la funcion.
-      //Cuando estas longitudes son las mismas el juego se acaba, Por lo que debemos llamar otra 
+      //Cuando estas longitudes son las mismas el juego se acaba, Por lo que debemos llamar otra
       //función que nos mande los movimientos realizados y la nos mande la victoria o derrota. Al div final
 
       bestGame(totalTime(), score);
@@ -96,7 +115,7 @@ function reveal(e) {
         gameScreen.style.display = "block";
         resetGame();
       });
-    };
+    }
   } else if (cont >= 2 && card1Value !== card2Value) {
     card1back = card1.querySelector(".back");
     card2back = card2.querySelector(".back");
@@ -117,15 +136,15 @@ function reveal(e) {
       card2back.style.background =
         "linear-gradient(0deg, #a4c3b2 15%, #F7F7EE)";
     }, 1000);
-  };
-};
+  }
+}
 
 resetButton.addEventListener("click", resetGame);
 
 // Gira cada carta al hacer click
 for (const card of cards) {
   card.addEventListener("click", reveal);
-};
+}
 
 //Funcion que hace que no puedas clicar de nuevo cuando son iguales los valores. Se le hace un callback que recibe la posicion de los div iguales
 function removeClick(index1, index2) {
@@ -135,8 +154,8 @@ function removeClick(index1, index2) {
   } else {
     cards[index1].removeEventListener("click", reveal);
     cards[index2].removeEventListener("click", reveal);
-  };
-};
+  }
+}
 
 // Resetear partida
 function resetGame() {
@@ -171,9 +190,9 @@ function resetGame() {
   for (const card of cards) {
     card.classList.remove("flipped");
     card.addEventListener("click", reveal);
-  };
+  }
   barajar();
-};
+}
 
 // Cambio de primera pantalla al juego, al pulsar el boton de "empezar"
 startButton.addEventListener("click", function () {
@@ -193,7 +212,7 @@ function barajar() {
     gameApp.classList.add("tracking-in-expand-forward-bottom");
     for (const card of cards) {
       card.classList.add("rotate-scale-down");
-    };
+    }
   }, 1600);
 
   setTimeout(() => {
@@ -201,9 +220,9 @@ function barajar() {
     gameApp.classList.remove("tracking-in-expand-forward-bottom");
     for (const card of cards) {
       card.classList.remove("rotate-scale-down");
-    };
+    }
   }, 3200);
-};
+}
 
 // Resultado de la partida en la pantalla final
 function finalScore(score, totalTime) {
@@ -216,8 +235,10 @@ function finalScore(score, totalTime) {
 
   tries.innerHTML = `Intentos necesarios ${score}`;
   time.innerHTML = `Tiempo total: ${totalTime}s`;
-  best.innerHTML = `${localStorage.getItem("movements")} movimientos en ${localStorage.getItem("fastest")}s`;
-};
+  best.innerHTML = `${localStorage.getItem(
+    "movements"
+  )} movimientos en ${localStorage.getItem("fastest")}s`;
+}
 
 // Mejor partida en la pantalla final
 function bestGame(totalTime, score) {
@@ -225,26 +246,32 @@ function bestGame(totalTime, score) {
     if (score < localStorage.getItem("movements")) {
       localStorage.setItem("movements", score);
       localStorage.setItem("fastest", totalTime);
-    };
-    if (score == localStorage.getItem("movements") && totalTime < localStorage.getItem("fastest")) {
+    }
+    if (
+      score == localStorage.getItem("movements") &&
+      totalTime < localStorage.getItem("fastest")
+    ) {
       localStorage.setItem("fastest", totalTime);
-    };
-  } else if (!localStorage.getItem("movements") || localStorage.getItem("movements") == 0) {
+    }
+  } else if (
+    !localStorage.getItem("movements") ||
+    localStorage.getItem("movements") == 0
+  ) {
     localStorage.setItem("movements", score);
     localStorage.setItem("fastest", totalTime);
-  };
-};
+  }
+}
 
 // Marcador de movimientos ingame
 function scoreMarker(score) {
   marker.innerHTML = score;
-};
+}
 
 // Cronómetro partida ingame
 function timer() {
   let actualTime = parseInt(new Date().getTime() / 1000);
-  return timeMarker.innerHTML = `${actualTime - startTime}s`;
-};
+  return (timeMarker.innerHTML = `${actualTime - startTime}s`);
+}
 
 // Calcular el tiempo total de la partida en la pantalla final
 const totalTime = () => {
