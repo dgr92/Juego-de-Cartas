@@ -9,6 +9,8 @@
   --font-01: sans-serif;
 
   --font-default: 18px;
+  --text-xxs: 14px;
+  --text-xs: 16px;
   --text-sm: 20px;
   --text-md: 25px;
   --text-lg: 40px;
@@ -278,3 +280,83 @@ background: var(--color-background-cards-screens);
 
 .rotate-scale-down{animation:rotate-scale-down 1.2s linear both} @keyframes rotate-scale-down{0%{transform:scale(1) rotateZ(0)}50%{transform:scale(.5) rotateZ(180deg)}100%{transform:scale(1) rotateZ(360deg)}}
 
+
+/*Media queries*/
+
+@media (min-width: 320px) and (max-width: 425px) {
+
+h1 {
+    font-size: var(--text-sm);
+  }
+
+h2 {
+    font-size: var(--text-xs);
+    margin-top: 10px;
+  }
+
+
+.box-screen {
+    width: 75%;
+    height: 25.5rem;
+    padding: 15px;
+  }
+
+.start-screen .game-rules {
+    padding: 10px 5px;
+    font-size: var(--text-xxs);
+    text-align: left;
+  }
+
+.game-rules .list-title {
+  margin-top: 8px;
+}
+
+.card {
+  width: 55px;
+  height: 80px;
+  }
+
+.front,
+.back {
+  font-size: 2.5rem;
+}
+}
+
+
+@media (min-width: 425px) and (max-width: 768px) {
+
+  h1 {
+    font-size: var(--text-md);
+  }
+
+  h2 {
+    font-size: var(--text-sm);
+    margin-top: 15px;
+  }
+
+  .box-screen {
+    width: 75%;
+    height: 25.5rem;
+    padding: 15px;
+  }
+
+  .start-screen .game-rules {
+    padding: 20px 10px;
+    font-size: var(--text-xs);
+  }
+
+  .card {
+  width: 80px;
+  height: 100px;
+  }
+
+  .front,
+.back {
+  font-size: 3.5rem;
+}
+
+.final-screen{
+  padding: 20px 10px;
+  font-size: var(--text-xs);
+}
+}
