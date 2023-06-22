@@ -160,8 +160,10 @@ function reveal(e) {
       cont = 0;
       card1.classList.remove("shake-left-right"); //Animación
       card2.classList.remove("shake-left-right");
-      card1back.style.background = "linear-gradient(steelblue, lightsteelblue)";
-      card2back.style.background = "linear-gradient(steelblue, lightsteelblue)";
+      card1back.style.background =
+        "linear-gradient(0deg, #b0c4de 15%, #f7f7f7 60%)";
+      card2back.style.background =
+        "linear-gradient(0deg, #b0c4de 15%, #f7f7f7 60%)";
     }, 1000);
   }
   // return emojisValue;
@@ -244,7 +246,7 @@ function finalScore(score, totalTime) {
   gameScreen.classList.add("blur-out-contract");
   setTimeout(() => {
     gameScreen.style.display = "none";
-    finalScreen.style.display = "block";
+    finalScreen.style.display = "grid";
     finalScreen.classList.add("blur-in-expand");
   }, 800);
 
@@ -302,6 +304,22 @@ function timer() {
 //Para cambiar modo
 let dark_mode = document.getElementById("dark-mode");
 // let label_change_mode = document.querySelector(".change-mode");
-dark_mode.addEventListener("change", () => {
+dark_mode.addEventListener("change", (e) => {
   document.body.classList.toggle("dark");
+  if (e.target.checked === true) {
+    startScreen.style.background = "#495057";
+    finalScreen.style.background = "#495057";
+  } else {
+    startScreen.style.background =
+      "linear-gradient(0deg, #a4c3b2 15%, #F7F7EE)";
+    finalScreen.style.background =
+      "linear-gradient(0deg, #a4c3b2 15%, #F7F7EE)";
+  }
 });
+
+// //PARA CRISTIPHER
+// const li = document.querySelectorAll(".game-rules li:not(:first-child)");
+// let arrayLi = [...li];
+// //NECESARIO CREAR UN BUCLE PARA QUE RECORRAS ESOS LI Y PONGA SU EMOJI
+// arrayLi[0].setAttribute("data-content", "EMOJIISS ");
+// console.log(arrayLi);
