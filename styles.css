@@ -1,29 +1,36 @@
 :root{
-  --color-01: #006EB4;
-  --color-02: #F0C932;
-  --color-03: #92DEBA; 
+  /* --color-01: #495057; */
+  --color-btn: #f0f0f0; 
+  --color-Hover:#c4f8ff;
+  --color-dark:#343A40;
+  --color-background-general:#dbe9e6 ; 
+  --color-background-cards-screens:linear-gradient(0deg, #a4c3b2 15%, #F7F7EE);
 
   --font-01: sans-serif;
 
-  --font-default: 16px;
+  --font-default: 18px;
   --text-sm: 20px;
   --text-md: 25px;
   --text-lg: 40px;
+
+  --box-shadow-screen:0px 0px 6px 4px rgb(0 0 0 / 50%);
 }
  
 * {
   box-sizing: border-box;
   font-family: var(--font-01);
   font-weight: bold;
+  margin: 0;
+  padding: 0;
 }
 
 body {
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 90vh;
-  background-color: var(--color-01);
-  transition: color 1s ease,background-color 1s ease;
+  min-height: 100vh;
+  transition: color 0.5s ease,background-color 0.30s ease;
+  background-color: var(--color-background-general);  
 }
 
 h1{
@@ -37,7 +44,7 @@ h2{
   margin-top: 20px;
 }
 
-/*Modo oscuro - No cambiar*/
+/*----DARK MODE----*/
 .change-mode{
   position: absolute;
   top: 0.8rem;
@@ -77,49 +84,27 @@ h2{
 }
 
 .dark{
-  background-color: #1f1f1f;
+  background-color: var(--color-dark);
   color: #fff;
-  font-size: var(--font-default);
 }
 
 
-/*Animaciones*/
-
-.shake-left-right{animation:shake-left-right 0.8s linear both} @keyframes shake-left-right{0%,100%{transform:rotate(0deg);transform-origin:50% 50%}10%{transform:rotate(8deg)}20%,40%,60%{transform:rotate(-10deg)}30%,50%,70%{transform:rotate(10deg)}80%{transform:rotate(-8deg)}90%{transform:rotate(8deg)}}
-
-
-.blur-out-contract{animation:blur-out-contract 0.8s linear both} @keyframes blur-out-contract{0%{transform:scale(1);filter:blur(.01px);} 100%{transform:scale(0);filter:blur(12px);opacity:0}}
-
-
-.blur-in-expand{animation:blur-in-expand 0.8s linear both} @keyframes blur-in-expand{0%{transform:scale(0);filter:blur(12px);opacity:0}100%{transform:scale(1);filter:blur(0);opacity:1}}
-
-
-.tracking-out-expand-forward-bottom{animation:tracking-out-expand-forward-bottom 1.2s linear both} @keyframes tracking-out-expand-forward-bottom{0%{transform:translateZ(0) translateY(0);opacity:1}60%{opacity:.8}100%{letter-spacing:1em;transform:translateZ(-700px) translateY(100px);opacity:0}}
-
-
-.tracking-in-expand-forward-bottom{animation:tracking-in-expand-forward-bottom 1.5s linear both} @keyframes tracking-in-expand-forward-bottom{0%{letter-spacing:-.2em;transform:translateZ(-700px) translateY(100px);opacity:0}40%{opacity:.6}100%{transform:translateZ(0) translateY(0);opacity:1}}
-
-
-.rotate-scale-down{animation:rotate-scale-down 1.2s linear both} @keyframes rotate-scale-down{0%{transform:scale(1) rotateZ(0)}50%{transform:scale(.5) rotateZ(180deg)}100%{transform:scale(1) rotateZ(360deg)}}
-
-
-/*---------*/
+/*----SCREENS-----*/
+.box-screen {
+  min-width: 40%;
+  height: 27.5rem;
+  box-sizing: border-box;
+  padding: 30px 25px 25px 25px;
+}
 
 .start-screen{
   text-align: center;
-  background-color: var(--color-02);
+  background: var(--color-background-cards-screens);
   border-radius: 5%;
-  box-shadow:  0px 0px 6px 4px rgb(0 0 0 / 50%)
+  box-shadow: var(--box-shadow-screen)
 }
 
-.start-button{
-  padding: 8px 15px;
-  margin-bottom: 20px;
-  border-radius: 2%;
-  background-color: var(--color-03);
-}
-
-.game-rules {
+.start-screen .game-rules {
   display: flex;
   justify-content: flex-start;
   align-items: start;
@@ -130,7 +115,7 @@ h2{
   font-size: var(--font-default);
 }
 
-.list-title{
+.game-rules .list-title{
   font-size: var(--text-sm);
 }
 
@@ -138,10 +123,30 @@ h2{
   margin-top: 10px;
 }
  
-.game-rules li::before{
-  content:"😱";
+.game-rules li:not(:first-child)::before{
+  content: attr(data-content); /*-----PARA CRISTOPHER------*/
 }
-.score-marker {
+
+
+.final-screen {
+  display: none;
+  text-align: center;
+  border-radius: 5%;
+  box-shadow:  var(--box-shadow-screen);
+  align-items: center;
+  justify-content: center;
+  line-height: 1.30rem;
+background: var(--color-background-cards-screens);
+}
+
+
+/*--GAME screen and CARDS*/
+
+.game-screen {
+  display: none;
+}
+
+.game-screen .score-marker {
   display: flex;
   justify-content: space-evenly;
   margin: auto;
@@ -166,38 +171,6 @@ h2{
   margin: 3px;
 }
 
-.game-screen {
-  display: none;
-}
-
-.final-screen {
-  display: none;
-  background-color: var(--color-02);
-  border-radius: 10%;
-  text-align: center;
-  background-color: var(--color-02);
-  border-radius: 5%;
-  box-shadow:  0px 0px 6px 4px rgb(0 0 0 / 50%)
-
-}
-
-.final-screen p:first-child {
-  margin-top: 100px;
-}
-
-.tamaños {
-  min-width: 40%;
-  min-height: 60%;
-}
-
-.end-button{
-  margin-bottom: 10px;
-}
-
-.button-common{
-  background-color: var(--color-03);
-}
-
 .gameApp {
   display: grid;
   justify-content: center;
@@ -209,14 +182,7 @@ h2{
   justify-items: stretch;
 }
 
-.play-again{
-  padding: 6px 10px;
-  display: block;
-  margin: 10px auto;
-  position: relative;
-  text-align: center;
-  background-color: var(--color-03);
-}
+
 
 .card {
   position: relative;
@@ -242,16 +208,15 @@ h2{
   background: linear-gradient(black, gray);
   display: grid;
   place-content: center;
-  font-size: 6rem;
+  font-size: 5rem;
   border-radius: 1rem;
   backface-visibility: hidden;
   user-select: none;
-   /* box-shadow: 5px -4px 7px #3a3a3a; */
    box-shadow: -6px 5px 5px rgb(0,0,0, 0.5);
 }
 
 .back {
-  background: linear-gradient(steelblue, lightsteelblue);
+  background: var(--color-background-cards-screens);
   transform: rotateY( 180deg );
 }
 
@@ -259,3 +224,57 @@ h2{
   transform: rotateY( 180deg ) ;
   transition: transform 0.5s;
 }
+
+
+/*--BUTTONS--*/
+.start-button{
+  background-color: var(--color-btn);
+}
+
+.play-again{
+  padding: 6px 10px;
+  display: block;
+  margin: 10px auto;
+  position: relative;
+  text-align: center;
+  background-color: var(--color-btn);
+}
+
+.end-button{
+  margin-bottom: 10px;
+}
+
+.button-common{
+  background-color: var(--color-btn);
+  box-shadow: -2px 2px 3px 1px rgba(0,0,0,0.2) ;
+  border:solid 0.5px ; 
+  border-radius: 5px;
+  padding: 8px 15px;
+  margin-bottom: 10px;
+}
+
+.button-common:hover{
+  cursor: pointer;
+  background-color: var(--color-Hover);
+}
+
+
+/*Animaciones*/
+
+.shake-left-right{animation:shake-left-right 0.8s linear both} @keyframes shake-left-right{0%,100%{transform:rotate(0deg);transform-origin:50% 50%}10%{transform:rotate(8deg)}20%,40%,60%{transform:rotate(-10deg)}30%,50%,70%{transform:rotate(10deg)}80%{transform:rotate(-8deg)}90%{transform:rotate(8deg)}}
+
+
+.blur-out-contract{animation:blur-out-contract 0.8s linear both} @keyframes blur-out-contract{0%{transform:scale(1);filter:blur(.01px);} 100%{transform:scale(0);filter:blur(12px);opacity:0}}
+
+
+.blur-in-expand{animation:blur-in-expand 0.8s linear both} @keyframes blur-in-expand{0%{transform:scale(0);filter:blur(12px);opacity:0}100%{transform:scale(1);filter:blur(0);opacity:1}}
+
+
+.tracking-out-expand-forward-bottom{animation:tracking-out-expand-forward-bottom 1.2s linear both} @keyframes tracking-out-expand-forward-bottom{0%{transform:translateZ(0) translateY(0);opacity:1}60%{opacity:.8}100%{letter-spacing:1em;transform:translateZ(-700px) translateY(100px);opacity:0}}
+
+
+.tracking-in-expand-forward-bottom{animation:tracking-in-expand-forward-bottom 1.5s linear both} @keyframes tracking-in-expand-forward-bottom{0%{letter-spacing:-.2em;transform:translateZ(-700px) translateY(100px);opacity:0}40%{opacity:.6}100%{transform:translateZ(0) translateY(0);opacity:1}}
+
+
+.rotate-scale-down{animation:rotate-scale-down 1.2s linear both} @keyframes rotate-scale-down{0%{transform:scale(1) rotateZ(0)}50%{transform:scale(.5) rotateZ(180deg)}100%{transform:scale(1) rotateZ(360deg)}}
+

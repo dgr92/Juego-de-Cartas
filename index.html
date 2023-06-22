@@ -12,7 +12,7 @@
     <input type="checkbox" id="dark-mode">
     <label for="dark-mode" class="change-mode"></label>
 
-    <div class="start-screen tamaños">
+    <div class="start-screen box-screen">
         <h1>Juego de Memoria</h1>
         <h2>Pon a prueba tu memoria encontrando parejas</h2>
         <ul class="game-rules">
@@ -39,16 +39,21 @@
         <section class="gameApp" id="gameApp"></section>
         <button class="play-again button-common" id="play-again">Jugar de Nuevo</button>
     </div>
-    <div class="final-screen tamaños">
-        <p>¡Enhorabuena! ¡Has ganado!</p>
-        <p></p>
-        <p></p>
+    <div class="final-screen box-screen">
+        <div>
+            <p>¡Enhorabuena! ¡Has ganado!</p>
+            <p></p>
+            <p></p>
+        </div>
         <div class="best-game">
             <p>Mejor partida:</p>
             <p></p>
         </div>
-        <button class="end-button button-common">Volver a jugar</button>
-        <button class="reset-best-game">Reset Mejor Partida</button>
+        <div>
+
+            <button class="end-button button-common">Volver a jugar</button>
+            <button class="reset-best-game button-common">Reset Mejor Partida</button> <!--       clase common    -->
+        </div>
     </div>
     <script type="module" src="main.js"></script>
 </body>
