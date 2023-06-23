@@ -1,21 +1,4 @@
-const listEmojis = [
-  "🤣",
-  "🤣",
-  "😡",
-  "😡",
-  "🤢",
-  "🤢",
-  "💩",
-  "💩",
-  "🤪",
-  "🤪",
-  "😍",
-  "😍",
-  "😱",
-  "😱",
-  "🤩",
-  "🤩",
-];
+const listEmojis = ["🤣", "🤣", "😡", "😡", "🤢", "🤢", "💩", "💩", "🤪", "🤪", "😍", "😍", "😱", "😱", "🤩", "🤩"];
 
 // Captura de variables a utilizar
 const startButton = document.querySelector(".start-button");
@@ -26,13 +9,9 @@ const gameScreen = document.querySelector(".game-screen");
 const tries = document.querySelector(".final-screen :nth-child(2)");
 const time = document.querySelector(".final-screen :nth-child(3)");
 const best = document.querySelector(".best-game :last-child");
-const marker = document.querySelector(
-  ".score-marker :first-child :nth-child(2)"
-);
+const marker = document.querySelector(".score-marker :first-child :nth-child(2)");
 const resetBestGame = document.querySelector(".reset-best-game");
-const timeMarker = document.querySelector(
-  ".score-marker :last-child :nth-child(2)"
-);
+const timeMarker = document.querySelector(".score-marker :last-child :nth-child(2)");
 let gameApp = document.querySelector(".gameApp");
 let resetButton = document.querySelector(".play-again");
 
@@ -55,8 +34,8 @@ listEmojis.forEach((emoji) => {
   templateHTML += `
   <div class="card">
     <div class="content">
-      <div class=" front">❔</div>
-      <div class=" back">${emoji}</div>
+      <div class="front">❔</div>
+      <div class="back">${emoji}</div>
     </div>
   </div>`;
 });
@@ -80,6 +59,7 @@ function reveal(e) {
     card1 = currentCard;
     card1Value = card1.querySelector(".back").innerHTML;
     cont++;
+
   } else if (cont > 0 && cont < 2) {
     //carta 2
     const currentCard = e.currentTarget;
@@ -91,7 +71,7 @@ function reveal(e) {
 
     // Marcador de puntos ingame
     scoreMarker(score);
-  }
+  };
   if (cont === 2 && card1Value === card2Value) {
     //me deja seguir jugando y me mete en el array los valores
     const index1 = cards.indexOf(card1); //Obtenemos el indice del elemento que clicamos para poder limpiar el evento y que no nos permita clickar 2 veces el mismo.
@@ -115,7 +95,7 @@ function reveal(e) {
         gameScreen.style.display = "block";
         resetGame();
       });
-    }
+    };
   } else if (cont >= 2 && card1Value !== card2Value) {
     card1back = card1.querySelector(".back");
     card2back = card2.querySelector(".back");
@@ -136,15 +116,15 @@ function reveal(e) {
       card2back.style.background =
         "linear-gradient(0deg, #a4c3b2 15%, #F7F7EE)";
     }, 1000);
-  }
-}
+  };
+};
 
 resetButton.addEventListener("click", resetGame);
 
 // Gira cada carta al hacer click
 for (const card of cards) {
   card.addEventListener("click", reveal);
-}
+};
 
 //Funcion que hace que no puedas clicar de nuevo cuando son iguales los valores. Se le hace un callback que recibe la posicion de los div iguales
 function removeClick(index1, index2) {
@@ -154,8 +134,8 @@ function removeClick(index1, index2) {
   } else {
     cards[index1].removeEventListener("click", reveal);
     cards[index2].removeEventListener("click", reveal);
-  }
-}
+  };
+};
 
 // Resetear partida
 function resetGame() {
@@ -175,8 +155,8 @@ function resetGame() {
     templateHTML += `
     <div class="card">
       <div class="content">
-        <div class=" front">❔</div>
-        <div class=" back">${emoji}</div>
+        <div class="front">❔</div>
+        <div class="back">${emoji}</div>
       </div>
     </div>`;
   });
@@ -190,9 +170,9 @@ function resetGame() {
   for (const card of cards) {
     card.classList.remove("flipped");
     card.addEventListener("click", reveal);
-  }
+  };
   barajar();
-}
+};
 
 // Cambio de primera pantalla al juego, al pulsar el boton de "empezar"
 startButton.addEventListener("click", function () {
@@ -212,7 +192,7 @@ function barajar() {
     gameApp.classList.add("tracking-in-expand-forward-bottom");
     for (const card of cards) {
       card.classList.add("rotate-scale-down");
-    }
+    };
   }, 1600);
 
   setTimeout(() => {
@@ -220,9 +200,9 @@ function barajar() {
     gameApp.classList.remove("tracking-in-expand-forward-bottom");
     for (const card of cards) {
       card.classList.remove("rotate-scale-down");
-    }
+    };
   }, 3200);
-}
+};
 
 // Resultado de la partida en la pantalla final
 function finalScore(score, totalTime) {
@@ -235,10 +215,8 @@ function finalScore(score, totalTime) {
 
   tries.innerHTML = `Intentos necesarios ${score}`;
   time.innerHTML = `Tiempo total: ${totalTime}s`;
-  best.innerHTML = `${localStorage.getItem(
-    "movements"
-  )} movimientos en ${localStorage.getItem("fastest")}s`;
-}
+  best.innerHTML = `${localStorage.getItem("movements")} movimientos en ${localStorage.getItem("fastest")}s`;
+};
 
 // Mejor partida en la pantalla final
 function bestGame(totalTime, score) {
@@ -247,31 +225,25 @@ function bestGame(totalTime, score) {
       localStorage.setItem("movements", score);
       localStorage.setItem("fastest", totalTime);
     }
-    if (
-      score == localStorage.getItem("movements") &&
-      totalTime < localStorage.getItem("fastest")
-    ) {
+    if (score == localStorage.getItem("movements") && totalTime < localStorage.getItem("fastest")) {
       localStorage.setItem("fastest", totalTime);
     }
-  } else if (
-    !localStorage.getItem("movements") ||
-    localStorage.getItem("movements") == 0
-  ) {
+  } else if (!localStorage.getItem("movements") || localStorage.getItem("movements") == 0) {
     localStorage.setItem("movements", score);
     localStorage.setItem("fastest", totalTime);
-  }
-}
+  };
+};
 
 // Marcador de movimientos ingame
 function scoreMarker(score) {
   marker.innerHTML = score;
-}
+};
 
 // Cronómetro partida ingame
 function timer() {
   let actualTime = parseInt(new Date().getTime() / 1000);
   return (timeMarker.innerHTML = `${actualTime - startTime}s`);
-}
+};
 
 // Calcular el tiempo total de la partida en la pantalla final
 const totalTime = () => {
@@ -297,7 +269,7 @@ dark_mode.addEventListener("change", (e) => {
       "linear-gradient(0deg, #a4c3b2 15%, #F7F7EE)";
     finalScreen.style.background =
       "linear-gradient(0deg, #a4c3b2 15%, #F7F7EE)";
-  }
+  };
 });
 
 //PARA CRISTIPHER
