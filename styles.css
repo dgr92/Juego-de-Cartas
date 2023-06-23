@@ -1,12 +1,13 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap%27');
+
 :root{
-  /* --color-01: #495057; */
   --color-btn: #f0f0f0; 
   --color-Hover:#c4f8ff;
   --color-dark:#343A40;
   --color-background-general:#dbe9e6 ; 
   --color-background-cards-screens:linear-gradient(0deg, #a4c3b2 15%, #F7F7EE);
 
-  --font-01: sans-serif;
+  --font-01: Roboto, sans-serif;
 
   --font-default: 18px;
   --text-xxs: 14px;
@@ -46,7 +47,10 @@ h2{
   margin-top: 20px;
 }
 
-/*----DARK MODE----*/
+/*-------------------------*\
+          DARK MODE
+\*-------------------------*/
+
 .change-mode{
   position: absolute;
   top: 0.8rem;
@@ -89,8 +93,10 @@ h2{
   color: #fff;
 }
 
+/*-------------------------*\
+          SCREENS
+\*-------------------------*/
 
-/*----SCREENS-----*/
 .box-screen {
   min-width: 40%;
   height: 27.5rem;
@@ -112,7 +118,7 @@ h2{
   flex-direction: column;
   text-align: justify;
   list-style: none;
-  padding: 40px;
+  padding: 25px 40px;
   font-size: var(--font-default);
 }
 
@@ -141,8 +147,9 @@ h2{
   min-width: 30%;
 }
 
-
-/*--GAME screen and CARDS*/
+/*-------------------------*\
+    GAME screen and CARDS
+\*-------------------------*/
 
 .game-screen {
   display: none;
@@ -228,7 +235,12 @@ h2{
 }
 
 
-/*--BUTTONS--*/
+/*---------------------*\
+         BUTTONS
+\*---------------------*/
+
+
+
 .start-button{
   background-color: var(--color-btn);
 }
@@ -246,6 +258,10 @@ h2{
   margin-bottom: 10px;
 }
 
+.reset-best-game{
+  margin-left: 10px;
+}
+
 .button-common{
   background-color: var(--color-btn);
   box-shadow: -2px 2px 3px 1px rgba(0,0,0,0.2) ;
@@ -261,9 +277,52 @@ h2{
 }
 
 
-/*Media queries*/
+/*-------------------------*\
+       Media queries
+\*-------------------------*/
 
-@media (min-width: 320px) and (max-width: 425px) {
+
+@media  (max-width: 768px) {
+
+  h1 {
+    font-size: var(--text-md);
+  }
+
+  h2 {
+    font-size: var(--text-sm);
+    margin-top: 15px;
+  }
+
+  .box-screen {
+    width: 75%;
+    height: 25.5rem;
+    padding: 15px;
+  }
+
+  .start-screen .game-rules {
+    padding: 25px 10px;
+    font-size: var(--text-xs);
+    text-align: left;
+  }
+
+  .card {
+  width: 80px;
+  height: 100px;
+  }
+
+  .front,
+.back {
+  font-size: 3.5rem;
+}
+
+.final-screen{
+  padding: 20px 10px;
+  font-size: var(--text-xs);
+}
+}
+
+
+@media (max-width: 425px) {
 
 h1 {
     font-size: var(--text-sm);
@@ -282,19 +341,16 @@ h2 {
   }
 
 .start-screen .game-rules {
-    padding: 10px 5px;
+    padding: 16px 5px;
     font-size: var(--text-xxs);
     text-align: left;
   }
 
 .game-rules .list-title {
   margin-top: 8px;
+  font-size: var(--font-default);
 }
 
-.card {
-  width: 55px;
-  height: 80px;
-  }
 
 .front,
 .back {
@@ -317,46 +373,37 @@ h2 {
 
 }
 
-
-@media (min-width: 425px) and (max-width: 768px) {
-
-  h1 {
-    font-size: var(--text-md);
-  }
-
-  h2 {
-    font-size: var(--text-sm);
-    margin-top: 15px;
-  }
-
-  .box-screen {
-    width: 75%;
-    height: 25.5rem;
-    padding: 15px;
-  }
-
+@media (max-width:415px) {
   .start-screen .game-rules {
-    padding: 20px 10px;
-    font-size: var(--text-xs);
+    padding: 16px 6px;
+    font-size: 12px;
+    text-align: left;
+  }
+  .gameApp{
+    grid-gap: 0px;
   }
 
   .card {
-  width: 80px;
-  height: 100px;
+    width: 55px;
+    height: 80px;
   }
-
-  .front,
-.back {
-  font-size: 3.5rem;
+ 
+  .reset-best-game{
+    margin-left: 0px;
+  }
 }
 
-.final-screen{
-  padding: 20px 10px;
-  font-size: var(--text-xs);
-}
+@media (max-width:325px) {
+ .start-screen .game-rules {
+    padding: 6px 6px;
+    text-align: left;
+  }
 }
 
-/*Animaciones*/
+
+/*-------------------------*\
+        Animaciones
+\*-------------------------*/
 
 .shake-left-right{animation:shake-left-right 0.8s linear both} @keyframes shake-left-right{0%,100%{transform:rotate(0deg);transform-origin:50% 50%}10%{transform:rotate(8deg)}20%,40%,60%{transform:rotate(-10deg)}30%,50%,70%{transform:rotate(10deg)}80%{transform:rotate(-8deg)}90%{transform:rotate(8deg)}}
 
