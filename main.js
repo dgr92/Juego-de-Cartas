@@ -186,7 +186,7 @@ function resetGame() {
     card.classList.remove("flipped");
     card.addEventListener("click", reveal);
   };
-  barajar();
+  shuffleCards();
 };
 
 // Cambio de primera pantalla al juego, al pulsar el boton de "empezar"
@@ -201,7 +201,7 @@ startButton.addEventListener("click", function () {
 });
 
 // Animaciones de las cartas al resetear o volver a jugar
-function barajar() {
+function shuffleCards() {
   gameApp.classList.add("tracking-out-expand-forward-bottom");
   setTimeout(() => {
     gameApp.classList.add("tracking-in-expand-forward-bottom");

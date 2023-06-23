@@ -131,7 +131,7 @@ h2{
 }
  
 .game-rules li:not(:first-child)::before{
-  content: attr(data-content); /*-----PARA CRISTOPHER------*/
+  content: attr(data-content);
 }
 
 
