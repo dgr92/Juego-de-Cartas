@@ -27,7 +27,8 @@ let score = 0;
 let startTime;
 
 // Barajamos el Array
-listEmojis.sort(() => (Math.random() > 0.5 ? 1 : -1));
+shuffleEmojis(listEmojis);
+
 
 // Generar el tablero de cartas
 listEmojis.forEach((emoji) => {
@@ -137,9 +138,23 @@ function removeClick(index1, index2) {
   };
 };
 
+//Funcion barajar array cartas
+function shuffleEmojis(arrayEmojis) {
+  arrayEmojis.sort(() => (Math.random() > 0.5 ? 1 : -1));
+}
+
+//Emojis pantalla de inicio
+const li = document.querySelectorAll(".game-rules li:not(:first-child)");
+let arrayLi = [...li];
+
+for (let i = 0; i < arrayLi.length; i++) {
+  arrayLi[i].setAttribute("data-content", `${listEmojis[i]}  `);
+  console.log(arrayLi[i]);
+}
+
 // Resetear partida
 function resetGame() {
-  listEmojis.sort(() => (Math.random() > 0.5 ? 1 : -1));
+  shuffleEmojis(listEmojis);
   startTime = parseInt(new Date().getTime() / 1000);
   gameApp = document.querySelector(".gameApp");
   templateHTML = "";
@@ -272,9 +287,6 @@ dark_mode.addEventListener("change", (e) => {
   };
 });
 
-//PARA CRISTIPHER
-// const li = document.querySelectorAll(".game-rules li:not(:first-child)");
-// let arrayLi = [...li];
-//NECESARIO CREAR UN BUCLE PARA QUE RECORRAS ESOS LI Y PONGA SU EMOJI
-// arrayLi[0].setAttribute("data-content", "EMOJIISS ");
-// console.log(arrayLi);
+
+
+
