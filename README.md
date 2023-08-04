@@ -17,20 +17,20 @@ Descripción
     ● El juego debe llevar la cuenta de los intentos realizados.
     ● El resultado final es el número de intentos realizados. Cuando menor sea esa 
       puntuación (como mínimo puede ser 8) mejor.
-## Features
+## Características
 
-- Light/dark mode toggle
-- Responsive desing
+- Modo día/noche
+- Diseño Responsive
 
 
-## Authors
+## Autores
 
 - [@dgr92](https://github.com/dgr92) - David Graciá
 - [@godwitoski](https://github.com/godwitoski) - Juan Esteban De León
 - [@liliperezglez](https://github.com/liliperezglez) - Liliana Pérez
 - [@topher212](https://github.com/topher212) - Cristopher Herrán
 
-## 🔗 Links
+## 🔗 Enlaces
 
 [![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/david-gr/) David Graciá 
 
