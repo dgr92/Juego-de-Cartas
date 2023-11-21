@@ -1,4 +1,4 @@
-# Jsb22rt-GrupoB
+# Juego búsqueda de parejas de cartas
 
 Parejas de Emoji
 
